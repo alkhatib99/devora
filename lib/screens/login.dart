@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
-
 class Login extends StatelessWidget {
-   Login({Key? key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-return Scaffold(
-  body: const LoginPage(title: "LoginPage",),
-);
+    return WidgetsApp(
+      color: Colors.black,
+      builder: (context, child) => const LoginPage(title: "LoginPage"),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
-
 
   final String title;
 
@@ -24,36 +23,85 @@ class LoginPage extends StatefulWidget {
 }
 
 class _MyLoginPage extends State<LoginPage> {
-
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-child: Stack(
-  fit: StackFit.expand,
-  children: const [
-    SizedBox(
-
- width: 120,
-    ),
-    SizedBox(
-
-      child: Image(
-          image:AssetImage(
-              "")
-      ),
-
-    ),
-    SizedBox(
-
-    ),
-    SizedBox(
-
-    ),
-  ],
-
-),
-    );
-
-}
+    return Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: <Widget>[
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'TutorialKart',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                )),
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Sign in',
+                  style: TextStyle(fontSize: 20),
+                )),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'User Name',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: TextField(
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                //forgot password screen
+              },
+              child: const Text('Forgot Password',),
+            ),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
+                  onPressed: () {
+                    print(usernameController.text);
+                    print(passwordController.text);
+                  },
+                )
+            ),
+            Row(
+              children: <Widget>[
+                const Text('Does not have account?'),
+                TextButton(
+                  child: const Text(
+                    'Sign in',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    //signup screen
+                  },
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
+          ],
+        ));
+  }
 }
